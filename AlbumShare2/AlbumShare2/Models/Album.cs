@@ -11,6 +11,6 @@ namespace AlbumShare2.Models
         public string title { get; set; }
         public int UserID { get; set; }
         public virtual User User { get; set; }
-        public List<string> thumbnails;
+        public virtual ICollection<Image> Images { get; set; }
     }
 }
