@@ -37,7 +37,7 @@ namespace AlbumShare2
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             var connection = @"Server=(localdb)\mssqllocaldb;Database=SiteDB;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<SiteContext>
-                (options => options.UseSqlServer(connection));
+                (options => options.UseSqlServer(connection)); 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
