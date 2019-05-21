@@ -22,7 +22,8 @@ namespace AlbumShare2.Controllers
         // GET: Albums
         public async Task<IActionResult> Index()
         {
-            var siteContext = _context.Albums.Include(a => a.User);
+            var siteContext = _context.Albums.Include(a => a.User).Include(a => a.Images);
+
             return View(await siteContext.ToListAsync());
         }
 

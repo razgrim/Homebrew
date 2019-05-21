@@ -22,7 +22,8 @@ namespace AlbumShare2.Controllers
         // GET: Images
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Image.ToListAsync());
+            var siteContext = _context.Image.Include(i => i.Album);
+            return View(await siteContext.ToListAsync());
         }
 
         // GET: Images/Details/5
@@ -34,6 +35,7 @@ namespace AlbumShare2.Controllers
             }
 
             var image = await _context.Image
+                .Include(i => i.Album)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (image == null)
             {
@@ -46,6 +48,7 @@ namespace AlbumShare2.Controllers
         // GET: Images/Create
         public IActionResult Create()
         {
+            ViewData["AlbumID"] = new SelectList(_context.Albums, "Id", "Id");
             return View();
         }
 
@@ -54,7 +57,7 @@ namespace AlbumShare2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,url")] Image image)
+        public async Task<IActionResult> Create([Bind("Id,url,AlbumID")] Image image)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +65,7 @@ namespace AlbumShare2.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["AlbumID"] = new SelectList(_context.Albums, "Id", "Id", image.AlbumID);
             return View(image);
         }
 
@@ -78,6 +82,7 @@ namespace AlbumShare2.Controllers
             {
                 return NotFound();
             }
+            ViewData["AlbumID"] = new SelectList(_context.Albums, "Id", "Id", image.AlbumID);
             return View(image);
         }
 
@@ -86,7 +91,7 @@ namespace AlbumShare2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,url")] Image image)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,url,AlbumID")] Image image)
         {
             if (id != image.Id)
             {
@@ -113,6 +118,7 @@ namespace AlbumShare2.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["AlbumID"] = new SelectList(_context.Albums, "Id", "Id", image.AlbumID);
             return View(image);
         }
 
@@ -125,6 +131,7 @@ namespace AlbumShare2.Controllers
             }
 
             var image = await _context.Image
+                .Include(i => i.Album)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (image == null)
             {

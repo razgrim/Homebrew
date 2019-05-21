@@ -9,5 +9,7 @@ namespace AlbumShare2.Models
     {
         public int Id { get; set; }
         public string url { get; set; }
+        public int AlbumID { get; set; }
+        public virtual Album Album { get; set; }
     }
 }
