@@ -32,7 +32,7 @@ namespace AlbumShare2.Controllers
             {
                 return NotFound();
             }
-
+            //var siteContext = _context.Users.Include(a => a.posts);
             var user = await _context.Users
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (user == null)
@@ -40,7 +40,10 @@ namespace AlbumShare2.Controllers
                 return NotFound();
             }
 
-            return View(user);
+            //return View(user);
+            var siteContext = _context.Users.Include(a => a.posts).Include(a => a.albums);
+
+            return View(await siteContext.FirstOrDefaultAsync(m => m.Id == id));
         }
 
         // GET: Users/Create

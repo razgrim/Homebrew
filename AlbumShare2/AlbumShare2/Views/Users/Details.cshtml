@@ -34,9 +34,33 @@
         <dd>
             @Html.DisplayFor(model => model.address)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.posts)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.posts.Count)
+        </dd>
     </dl>
+    <h4>Posts</h4>
+    <hr />
+    <ul>
+        @foreach (var post in Model.posts)
+        {
+            <li>@post.body</li>
+        }
+    </ul>
+    <h4>Albums</h4>
+    <hr />
+    <ul>
+        @foreach (var album in Model.albums)
+        {
+            <li>
+                <a asp-controller="Albums" asp-action="Details" asp-route-id="@album.Id">@album.title</a>
+            </li>
+        }
+    </ul>
 </div>
+
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

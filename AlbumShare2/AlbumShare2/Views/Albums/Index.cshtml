@@ -5,26 +5,18 @@
 
 <h2>Index</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                Preview
+                Album
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.title)
+                @Html.DisplayNameFor(model => model.User)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.User)<br />
-                @Html.DisplayNameFor(model => model.User.name)
-                @Html.DisplayNameFor(model => model.User.email)
-                @Html.DisplayNameFor(model => model.User.phonenum)
-                @Html.DisplayNameFor(model => model.User.address)
+                Location
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -34,22 +26,20 @@
             try { url = item.Images.First().url; }
             catch { }
         
-            <tr>
-                <td>
-                    <img src="@url" height="100" width="100" />
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.User.Id)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                <img src="@url" height="100" width="100" /><br />
+                @Html.DisplayFor(modelItem => item.title)
+            </td>
+            <td>
+                <a asp-controller="Users" asp-action="Details" asp-route-id="@item.User.Id">@Html.DisplayFor(modelItem => item.User.name)</a><br />
+                @Html.DisplayFor(modelItem => item.User.email)<br />
+                @Html.DisplayFor(modelItem => item.User.phonenum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.address)
+            </td>
+        </tr>
         }
     </tbody>
 </table>
