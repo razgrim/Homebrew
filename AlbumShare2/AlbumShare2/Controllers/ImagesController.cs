@@ -57,7 +57,7 @@ namespace AlbumShare2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,url,AlbumID")] Image image)
+        public async Task<IActionResult> Create([Bind("Id,url,AlbumID")] Photo image)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace AlbumShare2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,url,AlbumID")] Image image)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,url,AlbumID")] Photo image)
         {
             if (id != image.Id)
             {

@@ -35,11 +35,18 @@ namespace AlbumShare2
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=SiteDB;Trusted_Connection=True;ConnectRetryCount=0";
+
+            //var connection = @"Server=(localdb)\mssqllocaldb;Database=SiteDB;Trusted_Connection=True;ConnectRetryCount=0";
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=EFProviders.InMemory;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<SiteContext>
                 (options => options.UseSqlServer(connection)); 
         }
 
+        public void loadData()
+        {
+            //https://docs.microsoft.com/en-us/ef/core/miscellaneous/testing/in-memory
+
+        }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {

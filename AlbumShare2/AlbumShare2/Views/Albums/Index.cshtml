@@ -47,14 +47,14 @@
         @foreach (var item in Model)
         {
             string url = "images/image15.jpg";
-            try { url = item.Images.First().url; }
+            try { url = item.Photos.First().tumbnailUrl; }
             catch { }
         
         <tr id="row @Html.DisplayFor(modelItem => item.Id)">
             <td colspan="3" class="images" hidden>
-                @foreach (var image in item.Images)
+                @foreach (var photo in item.Photos)
                 {
-                    <img src="@image.url" height="100" width="100" />
+                    <img src="@photo.tumbnailUrl" height="100" width="100" />
                 }
             <br /><a class="title" onclick="hideImages('row @Html.DisplayFor(modelItem => item.Id)')">@Html.DisplayFor(modelItem => item.title)</a>
             </td>
@@ -65,7 +65,7 @@
             <td class="details">
                 <a asp-controller="Users" asp-action="Details" asp-route-id="@item.User.Id">@Html.DisplayFor(modelItem => item.User.name)</a><br />
                 @Html.DisplayFor(modelItem => item.User.email)<br />
-                @Html.DisplayFor(modelItem => item.User.phonenum)
+                @Html.DisplayFor(modelItem => item.User.phone)
             </td>
             <td class="details">
                 @Html.DisplayFor(modelItem => item.User.address)
