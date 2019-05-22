@@ -20,9 +20,14 @@ namespace AlbumShare2.Controllers
         }
 
         // GET: Albums
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
             var siteContext = _context.Albums.Include(a => a.User).Include(a => a.Images);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                siteContext = siteContext.Where(s => s.title.Contains(searchString) || s.User.name.Contains(searchString)).Include(a => a.Images);
+            }
+            
 
             return View(await siteContext.ToListAsync());
         }

@@ -23,7 +23,12 @@
     }
 </script>
 <h2>Index</h2>
-
+<form asp-controller="Albums" asp-action="Index">
+    <p>
+        <input type="text" name="SearchString" placeholder="Search for User or Title...">
+        <input type="submit" value="Search" />
+    </p>
+</form>
 <table class="table">
     <thead>
         <tr>
