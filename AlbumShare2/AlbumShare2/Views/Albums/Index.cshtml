@@ -2,7 +2,26 @@
 @{
     ViewData["Title"] = "Index";
 }
-
+<script>
+    function showImages(rowID) {
+        var row = document.getElementById(rowID);
+        var images = row.getElementsByClassName("images")[0];
+        images.removeAttribute("hidden");
+        var details = row.getElementsByClassName("details");
+        for (var i = 0; i < details.length; i++) {
+            details[i].setAttribute("hidden", true);
+        }
+    }
+    function hideImages(rowID) {
+        var row = document.getElementById(rowID);
+        var images = row.getElementsByClassName("images")[0];
+        images.setAttribute("hidden", true);
+        var details = row.getElementsByClassName("details");
+        for (var i = 0; i < details.length; i++) {
+            details[i].removeAttribute("hidden");
+        }
+    }
+</script>
 <h2>Index</h2>
 
 <table class="table">
@@ -27,23 +46,23 @@
             catch { }
         
         <tr id="row @Html.DisplayFor(modelItem => item.Id)">
-            <td colspan="3" class="images @Html.DisplayFor(modelItem => item.Id)" hidden>
+            <td colspan="3" class="images" hidden>
                 @foreach (var image in item.Images)
                 {
                     <img src="@image.url" height="100" width="100" />
                 }
-                <span>@Html.DisplayFor(modelItem => item.title)</span>
+            <br /><a class="title" onclick="hideImages('row @Html.DisplayFor(modelItem => item.Id)')">@Html.DisplayFor(modelItem => item.title)</a>
             </td>
-            <td class="details @Html.DisplayFor(modelItem => item.Id)">
+            <td class="details">
                 <img src="@url" height="100" width="100" /><br />
-                <a class="title">@Html.DisplayFor(modelItem => item.title)</a>
+                <a class="title" onclick="showImages('row @Html.DisplayFor(modelItem => item.Id)')">@Html.DisplayFor(modelItem => item.title)</a>
             </td>
-            <td class="details @Html.DisplayFor(modelItem => item.Id)">
+            <td class="details">
                 <a asp-controller="Users" asp-action="Details" asp-route-id="@item.User.Id">@Html.DisplayFor(modelItem => item.User.name)</a><br />
                 @Html.DisplayFor(modelItem => item.User.email)<br />
                 @Html.DisplayFor(modelItem => item.User.phonenum)
             </td>
-            <td class="details @Html.DisplayFor(modelItem => item.Id)">
+            <td class="details">
                 @Html.DisplayFor(modelItem => item.User.address)
             </td>
         </tr>
