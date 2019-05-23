@@ -43,22 +43,13 @@
     </dl>
     <h4>Posts</h4>
     <hr />
-    <ul>
+    <dl class="user-posts">
         @foreach (var post in Model.posts)
         {
-            <li>@post.body</li>
+            <dt>@post.title</dt>
+            <dd>@post.body</dd>
         }
-    </ul>
-    <h4>Albums</h4>
-    <hr />
-    <ul>
-        @foreach (var album in Model.albums)
-        {
-            <li>
-                <a asp-controller="Albums" asp-action="Details" asp-route-id="@album.Id">@album.title</a>
-            </li>
-        }
-    </ul>
+    </dl>
 </div>
 
 <div>

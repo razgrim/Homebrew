@@ -22,7 +22,7 @@ namespace AlbumShare2.Controllers
         // GET: Images
         public async Task<IActionResult> Index()
         {
-            var siteContext = _context.Image.Include(i => i.Album);
+            var siteContext = _context.Photos.Include(i => i.Album);
             return View(await siteContext.ToListAsync());
         }
 
@@ -34,7 +34,7 @@ namespace AlbumShare2.Controllers
                 return NotFound();
             }
 
-            var image = await _context.Image
+            var image = await _context.Photos
                 .Include(i => i.Album)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (image == null)
@@ -77,7 +77,7 @@ namespace AlbumShare2.Controllers
                 return NotFound();
             }
 
-            var image = await _context.Image.FindAsync(id);
+            var image = await _context.Photos.FindAsync(id);
             if (image == null)
             {
                 return NotFound();
@@ -130,7 +130,7 @@ namespace AlbumShare2.Controllers
                 return NotFound();
             }
 
-            var image = await _context.Image
+            var image = await _context.Photos
                 .Include(i => i.Album)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (image == null)
@@ -146,15 +146,15 @@ namespace AlbumShare2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var image = await _context.Image.FindAsync(id);
-            _context.Image.Remove(image);
+            var image = await _context.Photos.FindAsync(id);
+            _context.Photos.Remove(image);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ImageExists(int id)
         {
-            return _context.Image.Any(e => e.Id == id);
+            return _context.Photos.Any(e => e.Id == id);
         }
     }
 }
