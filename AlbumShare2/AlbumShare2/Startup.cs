@@ -37,13 +37,14 @@ namespace AlbumShare2
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             //var connection = @"Server=(localdb)\mssqllocaldb;Database=SiteDB;Trusted_Connection=True;ConnectRetryCount=0";
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=EFProviders.InMemory;Trusted_Connection=True;ConnectRetryCount=0";
-            services.AddDbContext<SiteContext>
-                (options => options.UseSqlServer(connection)); 
+            //services.AddDbContext<SiteContext>(options => options.UseSqlServer(connection));
+            //var connection = @"Server=(localdb)\mssqllocaldb;Database=EFProviders.InMemory;Trusted_Connection=True;ConnectRetryCount=0";
+            services.AddDbContext<SiteContext>(options => options.UseInMemoryDatabase(databaseName: "MemDB1"));
         }
 
         public void loadData()
         {
+            //ConfigureServices.
             //https://docs.microsoft.com/en-us/ef/core/miscellaneous/testing/in-memory
 
         }
